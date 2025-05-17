@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Task from "@/components/Task";
+import Modal from "@/components/Modal";
 import {
 	AppShell,
 	Title,
@@ -16,24 +17,15 @@ import Tasks from "@/components/Tasks";
 
 export default function Home() {
 	return (
-		<Container mt="xl">
-			<Grid>
-				<Grid.Col
-					span={{ xs: 12, sm: 8, md: 5, xl: 6 }}
-					offset={{ xs: 0, sm: 2, md: 3.5, xl: 3 }}
-				>
-					<Card shadow="sm" radius="md" withBorder>
-						<Header />
-						<Divider mb="sm" variant="dashed" />
-						<Tasks
-							title="TODO TASKS"
-							priorities={["NORMAL", "HIGH"]}
-						/>
-						<Divider mb="sm" variant="dashed" />
-						<Tasks title="DONE TASKS" priorities={["DONE"]} />
-					</Card>
-				</Grid.Col>
-			</Grid>
-		</Container>
+		<div className="min-h-screen flex items-center justify-center px-4 py-10 bg-gray-50">
+			<div className="w-full max-w-xl border border-gray-300 rounded-md shadow-sm p-5 bg-white">
+				<Header />
+				<hr className="border-dashed border-gray-300 my-4" />
+				<Tasks title="TODO TASKS" priorities={["NORMAL", "HIGH"]} />
+				<hr className="border-dashed border-gray-300 my-4" />
+				<Tasks title="DONE TASKS" priorities={["DONE"]} />
+				<Modal />
+			</div>
+		</div>
 	);
 }

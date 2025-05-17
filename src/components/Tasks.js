@@ -1,48 +1,29 @@
 import { Grid, Title, Divider } from "@mantine/core";
 import Task from "./Task";
 import _ from "lodash";
+import { useZustandStore } from "../stores/useZustandStore";
 
 const Tasks = ({ title, priorities }) => {
-	const lists = [
-        {
-            title: 'TITLE TASK',
-            priority: 'DONE',
-            description: 'description title'
-        },
-        {
-            title: 'TITLE TASK',
-            priority: 'NORMAL',
-            description: 'description title'
-        },
-        {
-            title: 'TITLE TASK',
-            priority: 'HIGH',
-            description: 'description title'
-        },
-        {
-            title: 'TITLE TASK',
-            priority: 'NORMAL',
-            description: 'description title'
-        },
-    ];
-    const results = _.orderBy(_.filter(lists, (f) => _.includes(priorities, f.priority)), ['priority'], ['asc']);
-	return (
-		<Grid mb="sm">
-			<Grid.Col ta="center">
-				<Title order={3} mb="0">
-					{title || TASKS}
-				</Title>
-			</Grid.Col>
-			<Grid.Col px="sm">
-				{_.map(
-					results,
-					(v) => (
-						<Task {...v} />
-					)
-				)}
-			</Grid.Col>
-		</Grid>
-	);
+  const tasks = useZustandStore((state) => state.tasks);
+
+  const filteredTasks = _.orderBy(
+    _.filter(tasks, (task) => _.includes(priorities, task.priority)),
+    ["priority"],
+    ["asc"]
+  );
+
+  return (
+    <div className="mb-4">
+      <div className="flex justify-center">
+        <h3 className="text-lg font-semibold mb-0">{title || "TASKS"}</h3>
+      </div>
+      <div className="px-4">
+        {_.map(filteredTasks, (task) => (
+          <Task key={task.id} {...task} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Tasks;

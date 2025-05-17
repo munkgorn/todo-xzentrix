@@ -14,12 +14,15 @@
     "@mantine/hooks": "^8.0.1",
     "@mantine/modals": "^8.0.1",
     "@tabler/icons-react": "^3.33.0",
+    "@tanstack/react-query": "^5.76.1",
     "dayjs": "^1.11.13",
     "lodash": "^4.17.21",
     "next": "15.3.2",
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-query": "^3.39.3",
+    "zustand": "^5.0.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

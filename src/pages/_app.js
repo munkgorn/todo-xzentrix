@@ -1,12 +1,8 @@
 import { SessionProvider } from "next-auth/react";
-import { createTheme, MantineProvider } from "@mantine/core";
-import { ModalsProvider } from '@mantine/modals';
+import { QueryClient, QueryClientProvider } from 'react-query'; // Import QueryClient and QueryClientProvider
 import "../styles/globals.css";
-import "@mantine/core/styles.css";
 
-const theme = createTheme({
-	/** Put your mantine theme override here */
-});
+const queryClient = new QueryClient(); // Create a QueryClient instance
 
 export default function App({
 	Component,
@@ -15,11 +11,9 @@ export default function App({
 
 	return (
 		<SessionProvider session={session}>
-			<MantineProvider theme={theme}>
-				<ModalsProvider>
-					<Component {...pageProps} />
-				</ModalsProvider>
-			</MantineProvider>
+			<QueryClientProvider client={queryClient}> {/* Wrap with QueryClientProvider */}
+				<Component {...pageProps} />
+			</QueryClientProvider>
 		</SessionProvider>
 	);
 }
