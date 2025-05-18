@@ -1,0 +1,6 @@
+- table:
+    name: tasks
+    schema: public
+- table:
+    name: users
+    schema: public
