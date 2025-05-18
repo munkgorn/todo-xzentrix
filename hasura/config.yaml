@@ -1,0 +1,3 @@
+version: 2
+endpoint: https://todo-mg-xzentrix.hasura.app/v1/graphql
+admin_secret: 7BF4wrE6bN60vGmz4K4eTIbk0iZs4bdNdPVALfrVWUq4FZK3hll99HTbHF0kK6uD
