@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-const useModalStore = create((set) => ({
+const modalStore = create((set) => ({
   isOpen: false,
   title: '',
   content: null,
@@ -8,4 +8,4 @@ const useModalStore = create((set) => ({
   hide: () => set({ isOpen: false, title: '', content: null }),
 }));
 
-export { useModalStore };
+export { modalStore };

@@ -1,27 +1,43 @@
 import React from 'react';
+import { sendRegister, checkDuplicateUser } from '@/graphql/auth';
+import { useRouter } from 'next/router';
 
 const Register = () => {
-  const handleSubmit = (e) => {
+  const router = useRouter();
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (e.target.password.value !== e.target.confirmPassword.value) {
+      alert("Passwords do not match");
+      return;
+    }
+    const checkduplicateUser = await checkDuplicateUser(e.target.username.value);
+    if (checkduplicateUser) {
+      alert("Username already exists");
+      return;
+    }
     const formData = {
-      email: e.target.email.value,
+      username: e.target.username.value,
       password: e.target.password.value,
-      confirmPassword: e.target.confirmPassword.value,
     };
-    console.log('Register form data:', formData);
+    const result = await sendRegister(formData.username, formData.password);
+    console.log(result)
+    if (result) {
+      alert("Registration successful");
+      router.push("/auth/login");
+      // Redirect to login page or perform any other action
+    } else {
+      alert("Registration failed");
+    }
   };
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-blue-600 text-white p-4 shadow">
-        <h1 className="text-3xl font-bold">Todo App</h1>
-      </header>
       <main className="flex-grow flex items-center justify-center bg-gray-50">
         <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Register</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Register TO-DO app</h2>
           <div>
-            <label htmlFor="email" className="block mb-2 font-semibold text-gray-700">Email</label>
-            <input type="email" name="email" required className="border border-gray-300 p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <label htmlFor="username" className="block mb-2 font-semibold text-gray-700">Username</label>
+            <input type="text" name="username" required className="border border-gray-300 p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
           <div>
             <label htmlFor="password" className="block mb-2 font-semibold text-gray-700">Password</label>

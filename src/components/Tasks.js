@@ -1,10 +1,13 @@
 import { Grid, Title, Divider } from "@mantine/core";
 import Task from "./Task";
 import _ from "lodash";
-import { useZustandStore } from "../stores/useZustandStore";
+import { taskStore } from '@/stores/dataStore';
 
 const Tasks = ({ title, priorities }) => {
-  const tasks = useZustandStore((state) => state.tasks);
+  const tasks = taskStore((state) => state.tasks);
+  
+
+  console.log("Tasks", tasks);
 
   const filteredTasks = _.orderBy(
     _.filter(tasks, (task) => _.includes(priorities, task.priority)),

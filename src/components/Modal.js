@@ -1,11 +1,11 @@
 import React from "react";
-import { useModalStore } from "../stores/useModalStore";
+import { modalStore } from "@/stores/providerStore";
 
 const Modal = () => {
-  const isOpen = useModalStore((state) => state.isOpen);
-  const title = useModalStore((state) => state.title);
-  const content = useModalStore((state) => state.content);
-  const hide = useModalStore((state) => state.hide);
+  const isOpen = modalStore((state) => state.isOpen);
+  const title = modalStore((state) => state.title);
+  const content = modalStore((state) => state.content);
+  const hide = modalStore((state) => state.hide);
 
   if (!isOpen) return null;
 
